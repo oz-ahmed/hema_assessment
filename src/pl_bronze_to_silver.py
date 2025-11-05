@@ -1,7 +1,6 @@
 # Databricks notebook source
 # MAGIC %run ./config
 
-# COMMAND ----------
 
 from pyspark.sql.functions import col, to_date, year, month, dayofmonth, current_timestamp, lit
 import re
@@ -25,8 +24,6 @@ except Exception as e:
     raise
 
 
-# COMMAND ----------
-
 # Apply transformations and add partitioning columns 
 try:
     silver_df = (
@@ -44,10 +41,7 @@ except Exception as e:
     raise
 
 
-# COMMAND ----------
-
-# Write to Silver, partitioned by date 
-# We overwrite the staging table on each run
+# Write to Silver
 try:
     (
         silver_df.write

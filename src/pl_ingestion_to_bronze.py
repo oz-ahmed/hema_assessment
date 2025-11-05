@@ -1,7 +1,6 @@
 # Databricks notebook source
 # MAGIC %run ./config
 
-# COMMAND ----------
 
 from pyspark.sql.functions import current_timestamp, input_file_name, col
 
@@ -22,12 +21,7 @@ raw_df = (raw_df
     .withColumn("execution_datetime", current_timestamp())
 )
 
-# display(raw_df_with_metadata)
-
-# COMMAND ----------
-
 # Using 'overwrite' and 'overwriteSchema' to handle schema evolution 
-# This is the Parquet equivalent of 'mergeSchema' on write.
 try:
     (
         raw_df.write

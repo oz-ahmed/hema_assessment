@@ -160,7 +160,6 @@ unchanged_records_df = (
 )
 
 # Case 3: Changed records (in both, hash mismatch)
-# 3a. The *new* version of the record (from source)
 changed_new_records_df = (
     joined_df
     .filter(
