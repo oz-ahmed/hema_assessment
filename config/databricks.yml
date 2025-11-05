@@ -1,0 +1,55 @@
+# Configuration for Sales Data Pipeline - Databricks
+environment: "databricks"
+
+# Data paths using S3 external locations
+data_path:
+  databricks: "s3://hema-catalog-data/source/*.json"
+
+# Bronze layer configuration
+bronze:
+  transactions: "s3://hema-catalog-data/bronze"
+  catalog: "sales"
+  schema: "01_bronze"
+  table: "data"
+
+# Silver layer configuration
+silver:
+  data: "s3://hema-catalog-data/silver"
+  catalog: "sales"
+  schema: "02_silver"
+  table: "data"
+
+# Gold layer configuration
+gold_sales:
+  data: "s3://hema-catalog-data/gold/sales"
+  catalog: "sales"
+  schema: "03_gold"
+  table: "sales"
+
+# Gold layer configuration
+gold_customer:
+  data: "s3://hema-catalog-data/gold/customer"
+  catalog: "sales"
+  schema: "03_gold"
+  table: "customers"
+
+# Databricks specific configurations
+databricks:
+  workspace_name: "sales_dept"
+  catalog_name: "sales"
+  use_unity_catalog: true
+  
+# Storage configuration
+storage:
+  format: "parquet"
+  mode: "overwrite"
+  partition_by:
+    bronze: ["year", "month", "day"]
+    silver: ["year", "month", "day"]
+    gold: ["year", "month", "day"]
+  
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
